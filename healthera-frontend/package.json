@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --config webpack.config.js --port 5002"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",

@@ -26,6 +26,7 @@ jokeRouter
   })
 
   .put("/:id", (req, res) => {
+    console.log(req.params);
     jokeModel.findByIdAndUpdate(
       req.params.id,
       { title: req.query.title },

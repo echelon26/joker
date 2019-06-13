@@ -7,7 +7,7 @@ process.env.NODE_ENV = "development";
 module.exports = {
   mode: "development",
   target: "web",
-  entry: "./index.js",
+  entry: "./src/index.js",
   devtool: "cheap-module-source-map",
 
   devServer: {
