@@ -7,7 +7,7 @@ const { CSV } = process.env;
 
 const insertJokeFromCsvFile = joke => {
   response = fs.readFileSync(joke, "utf8");
-  console.log(response);
+  //console.log(response);
   return parse(response, {});
 };
 

@@ -5,20 +5,20 @@ const jokeModel = require("../model/jokeModel");
 jokeRouter
   .get("/", (req, res) => {
     jokeModel.find((error, jokes) => {
+      let RandomNumber = Math.floor(Math.random() * jokes.length);
+      randomJoke = jokes[RandomNumber];
       error
         ? res.status(404).json({ error: "No jokes found" })
-        : res.status(200).json(jokes);
+        : res.status(200).json({ jokes, randomJoke });
     });
   })
 
   .post("/", (req, res) => {
-    let jokes = new jokeModel(req.query);
+    let jokes = new jokeModel(req.body);
     jokes
       .save()
       .then(joke => {
-        res
-          .status(200)
-          .json({ message: "jokes inserted into database successfully" });
+        res.status(200).json({ joke, message: "joke created successfully" });
       })
       .catch(() => {
         res.status(400).json({ error: "Oops!! Joke not inserted" });
@@ -26,10 +26,9 @@ jokeRouter
   })
 
   .put("/:id", (req, res) => {
-    console.log(req.params);
     jokeModel.findByIdAndUpdate(
-      req.params.id,
-      { title: req.query.title },
+      req.body.id,
+      { title: req.body.title },
       (error, data) => {
         error
           ? res.status(404).json({ error: "Joke is not existing" })

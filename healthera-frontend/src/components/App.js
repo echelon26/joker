@@ -1,10 +1,10 @@
 import React from "react";
-
+import JokeComponent from "./jokeComponent/joke.component";
 class App extends React.Component {
   render() {
     return (
       <div>
-        <p>I am inside App page</p>
+        <JokeComponent />
       </div>
     );
   }

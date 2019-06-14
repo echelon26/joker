@@ -7,9 +7,11 @@
     "start": "webpack-dev-server --config webpack.config.js --port 5002"
   },
   "dependencies": {
+    "@material-ui/core": "^4.1.1",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "css-loader": "^2.1.1",
+    "dotenv": "^8.0.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.6",
