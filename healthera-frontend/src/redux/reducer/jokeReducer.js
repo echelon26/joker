@@ -1,12 +1,16 @@
 import * as actionType from "../action/actionType";
-const jokeReducer = (initialState = {}, action) => {
+
+const initialState={
+  jokes:null
+};
+const jokeReducer = (state=initialState , action) => {
   switch (action.type) {
     case actionType.CREATE_JOKE_SUCCESS: {
-      return { ...initialState, jokes: action.jokes };
+      return { ...state, jokes: action.jokes };
     }
 
     case actionType.LOAD_JOKE_SUCCESS: {
-      return { ...initialState, jokes: action.jokes };
+      return  { ...state, jokes: action.jokes };
     }
 
     case actionType.GET_RANDOM_JOKE_SUCCESS: {

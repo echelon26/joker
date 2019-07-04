@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import JokeList from "../jokeListComponent/JokeList.component";
+//import JokeList from "../jokeListComponent/JokeList.component";
+import MaterialTableDemo from "../jokeListComponent/JokeList.component";
 import {
   loadJokes,
   createJoke,
@@ -9,28 +10,26 @@ import {
 } from "../../redux/action/jokeAction";
 
 class JokeComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {};
+  // }
   componentDidMount() {
-    //
     this.props.loadJokes();
   }
 
-  render() {
-    return (
-      <>
-        <JokeList />
-      </>
-    );
+  render()   
+  {
+   return(<>
+   {this.props.jokeReducer && this.props.jokeReducer.jokes ?<MaterialTableDemo
+   props={this.props.jokeReducer.jokes}
+   />:null}
+   </>);
   }
 }
 
 const mapStateToProps = state => {
-  console.log(state.jokeReducer);
-  return { jokes: state.jokeReducer };
+  return { ...state};
 };
 
 const mapDispatchToProps = {
@@ -39,12 +38,6 @@ const mapDispatchToProps = {
   updateJoke,
   removeJoke
 };
-
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     loadJokes: bindActionCreators(loadJokes, dispatch)
-//   };
-// }
 
 export default connect(
   mapStateToProps,
