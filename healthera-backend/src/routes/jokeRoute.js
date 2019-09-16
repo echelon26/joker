@@ -42,8 +42,8 @@ jokeRouter
       error
         ? res.status(404).json({ error: "Joke is not existing" })
         : res
-            .status(200)
-            .json({ message: "Joke removed successfully from Database" });
+          .status(200)
+          .json({ message: "Joke removed successfully from Database" });
     });
   });
 module.exports = jokeRouter;

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class Api {
-  constructor() {}
+  constructor() { }
 
   createJoke = async joke => {
     let headers = {
@@ -23,7 +23,7 @@ class Api {
       "Content-Type": "application/json"
     };
     const response = await axios.put(
-      `http://localhost:7000/${joke.id}`,
+      `http://localhost:7000/${joke._id}`,
       joke,
       headers
     );
@@ -31,18 +31,19 @@ class Api {
     return response;
   };
   removeJoke = async joke => {
+    console.log('Going TO DELETE-------------');
     let headers = {
       Accept: "application/json",
       "Content-Type": "application/json"
     };
     const response = await axios.delete(
-      `http://localhost:7000/${joke.id}`,
+      `http://localhost:7000/${joke._id}`,
       joke,
       headers
     );
     return response;
   };
-  randomJoke = async () => {};
+  randomJoke = async () => { };
 }
 
 export default Api;

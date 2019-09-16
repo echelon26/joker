@@ -42,15 +42,13 @@ export const updateJoke = () => {
   };
 };
 
-export const removeJoke = () => {
-  const joke = {
-    id: "5d038405cc56dd11d49b535a"
-  };
+export const removeJoke = (joke) => {
   return async dispatch => {
     const jokes = await api.removeJoke(joke);
+    const jokesResult = await api.loadJokes();
     dispatch({
-      type: actionType.DELETE_JOKE_SUCCESS,
-      jokes
+      type: actionType.LOAD_JOKE_SUCCESS,
+      jokes: jokesResult
     });
   };
 };

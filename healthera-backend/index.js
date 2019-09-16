@@ -21,7 +21,8 @@ app.use((req, res, next) => {
   next();
 });
 
-let MongoURI = "mongodb://jitendra:jitendra123@ds247569.mlab.com:47569/jitendb";
+//let MongoURI = "mongodb://jitendra:jitendra123@ds247569.mlab.com:47569/jitendb";
+let MongoURI = "mongodb://localhost:27017/jokeDB";
 let options = {
   keepAlive: 30000,
   useNewUrlParser: true
@@ -44,6 +45,6 @@ app.use("/*", (req, res) => {
   res.send(boom.badRequest("invalid url"));
 });
 
-app.listen(port, function() {
+app.listen(port, function () {
   console.log(`Backend server Running on port: ${port}`);
 });
