@@ -12,33 +12,40 @@ export const loadJokes = () => {
   };
 };
 
-export const createJoke = () => {
-  const joke = {
-    title: "security is myth my friend"
-  };
+export const createJoke = (joke) => {
   return async dispatch => {
     const jokes = await api.createJoke(joke);
+    const jokesResult = await api.loadJokes();
     dispatch({
-      type: actionType.CREATE_JOKE_SUCCESS,
-      jokes
+      type: actionType.LOAD_JOKE_SUCCESS,
+      jokes: jokesResult
     });
   };
 };
-//"5d0378652ad536352435c5ff"
-//"5d0373184eb06c3f78c6d1f6"
-//"5d03746236b03249e899d29b"
-//5d0380e21386705078a7a10f
-export const updateJoke = () => {
-  const joke = {
-    id: "5d037fd6f7ec434a74fbccd9",
-    title: "game of throne"
-  };
+
+export const updateJoke = (joke) => {
   return async dispatch => {
-    const jokes = await api.updateJoke(joke);
-    dispatch({
-      type: actionType.UPDATE_JOKE_SUCCESS,
-      jokes
-    });
+
+    try{
+      const response = await api.updateJoke(joke);
+    console.log(response);
+    let status = response && response.status;
+    
+    if(status === 200){
+      const jokesResult = await api.loadJokes();
+      dispatch({
+        type: actionType.LOAD_JOKE_SUCCESS,
+        jokes: jokesResult
+      });
+    }
+    
+    }catch(error){
+      dispatch({
+        type: actionType.ERRORTOST_JOKE_FAILED,
+        errorMsg:'Joke Not updated' 
+      });
+    }
+    
   };
 };
 

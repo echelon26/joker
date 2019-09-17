@@ -9,7 +9,6 @@ class Api {
       "Content-Type": "application/json"
     };
     const response = await axios.post(`http://localhost:7000`, joke, headers);
-    console.log(response.data);
     return response.data;
   };
 
@@ -27,11 +26,9 @@ class Api {
       joke,
       headers
     );
-    //console.log(response);
     return response;
   };
   removeJoke = async joke => {
-    console.log('Going TO DELETE-------------');
     let headers = {
       Accept: "application/json",
       "Content-Type": "application/json"

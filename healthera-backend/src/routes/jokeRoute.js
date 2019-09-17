@@ -7,7 +7,7 @@ jokeRouter
     jokeModel.find((error, jokes) => {
       let RandomNumber = Math.floor(Math.random() * jokes.length);
       randomJoke = jokes[RandomNumber];
-      error
+      error || jokes==null
         ? res.status(404).json({ error: "No jokes found" })
         : res.status(200).json({ jokes, randomJoke });
     });
@@ -21,17 +21,19 @@ jokeRouter
         res.status(200).json({ joke, message: "joke created successfully" });
       })
       .catch(() => {
-        res.status(400).json({ error: "Oops!! Joke not inserted" });
+        res.status(500).json({ error: "Oops!! Joke not inserted" });
       });
   })
 
   .put("/:id", (req, res) => {
+    console.log(req);
     jokeModel.findByIdAndUpdate(
       req.body.id,
       { title: req.body.title },
       (error, data) => {
-        error
-          ? res.status(404).json({ error: "Joke is not existing" })
+console.log(req.body);
+        error || data==null
+          ? res.status(500).json({ message: "Joke is not updated" })
           : res.status(200).json({ message: "Joke updated successfully" });
       }
     );
@@ -39,8 +41,8 @@ jokeRouter
 
   .delete("/:id", (req, res) => {
     jokeModel.findByIdAndRemove(req.params.id, (error, jokes) => {
-      error
-        ? res.status(404).json({ error: "Joke is not existing" })
+      error || jokes==null
+        ? res.status(500).json({ message: "Joke is not existing" })
         : res
           .status(200)
           .json({ message: "Joke removed successfully from Database" });

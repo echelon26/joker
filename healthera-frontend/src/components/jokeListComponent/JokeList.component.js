@@ -1,44 +1,34 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 
-export default function MaterialTableDemo(props) {
-  //debugger;
-  // const [state, setState] = React.useState({
+export default function JokeList(props) {
   let columns = [
     { title: 'Title', field: 'title' },
-    { title: 'Creation_Date', field: 'creation_Date' },
-    { title: 'Updation_Date', field: 'updation_Date' }
+    { title: 'Creation_Date', field: 'creation_date' },
+    { title: 'Updation_Date', field: 'updation_date' }
   ]
-  //   // data: props.props.jokes.map(x=>{
-  //   //   return { title: x.title, Creation_Date: x.creation_date,Updation_Date:x.updation_date }
-  //   // })
-  // });
-
   return (
+    
     <MaterialTable
       title="Healthera"
       columns={columns}
       data={props.jokes.jokes}
       editable={{
-        onRowAdd: newData =>
-          new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.data];
-              data.push(newData);
-              setState({ ...state, data });
-            }, 600);
-          }),
-        onRowUpdate: (newData, oldData) =>
-          new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.data];
-              data[data.indexOf(oldData)] = newData;
-              setState({ ...state, data });
-            }, 600);
-          }),
-        onRowDelete: (joke) =>
+        onRowAdd:  joke =>
+        new Promise(resolve => {
+          setTimeout(() => {
+            resolve();
+            props.createJoke(joke);
+          }, 600);
+        }),
+        onRowUpdate: joke =>
+        new Promise(resolve => {
+          setTimeout(() => {
+            resolve();
+            props.updateJoke(joke);
+          }, 600);
+        }),
+        onRowDelete: joke =>
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
