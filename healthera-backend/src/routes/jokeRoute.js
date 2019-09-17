@@ -8,7 +8,7 @@ jokeRouter
       let RandomNumber = Math.floor(Math.random() * jokes.length);
       randomJoke = jokes[RandomNumber];
       error || jokes==null
-        ? res.status(404).json({ error: "No jokes found" })
+        ? res.status(500).json({ message: "No jokes found" })
         : res.status(200).json({ jokes, randomJoke });
     });
   })
@@ -18,10 +18,11 @@ jokeRouter
     jokes
       .save()
       .then(joke => {
-        res.status(200).json({ joke, message: "joke created successfully" });
+        let jokeId=joke._id;
+        res.status(200).json({ jokeId, message: "joke created successfully" });
       })
       .catch(() => {
-        res.status(500).json({ error: "Oops!! Joke not inserted" });
+        res.status(500).json({ message: "Oops!! Joke not inserted" });
       });
   })
 

@@ -33,7 +33,7 @@ class JokeComponent extends React.Component {
     return (<>
       {this.props.jokeReducer && this.props.jokeReducer.jokes ? <JokeList
         jokes={this.props.jokeReducer.jokes}
-        errorMsg={this.props.errorMsg}
+        message={this.props.message}
         createJoke={this.onCreateHandler}
         updateJoke={this.onUpdateHandler}
         removeJoke={this.onRemoveHandler}

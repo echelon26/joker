@@ -4,45 +4,58 @@ const api = new Api();
 
 export const loadJokes = () => {
   return async dispatch => {
-    const jokes = await api.loadJokes();
+    const response = await api.loadJokes();
     dispatch({
       type: actionType.LOAD_JOKE_SUCCESS,
-      jokes
+      jokes:response[`data`]
     });
   };
 };
 
 export const createJoke = (joke) => {
   return async dispatch => {
-    const jokes = await api.createJoke(joke);
-    const jokesResult = await api.loadJokes();
-    dispatch({
-      type: actionType.LOAD_JOKE_SUCCESS,
-      jokes: jokesResult
-    });
+    try {
+      const response = await api.createJoke(joke);
+      let status = response && response.status;
+      if(status === 200){
+        
+        const jokesResult = await api.loadJokes();
+        debugger;
+        return dispatch({
+          type: actionType.LOAD_JOKE_SUCCESS,
+          jokes: jokesResult[`data`],
+          message:response.data.message
+        });
+      }
+    }
+    catch(error){
+      dispatch({
+        type: actionType.ERRORTOST_JOKE_FAILED,
+        message: jokesResult.message
+      }); 
+    }
+    
   };
 };
 
 export const updateJoke = (joke) => {
   return async dispatch => {
-
-    try{
+    try {
       const response = await api.updateJoke(joke);
-    console.log(response);
-    let status = response && response.status;
+      console.log(response);
+      let status = response && response.status;
     
-    if(status === 200){
-      const jokesResult = await api.loadJokes();
-      dispatch({
-        type: actionType.LOAD_JOKE_SUCCESS,
-        jokes: jokesResult
-      });
-    }
-    
-    }catch(error){
+      if(status === 200){
+        const jokesResult = await api.loadJokes();
+        dispatch({
+          type: actionType.LOAD_JOKE_SUCCESS,
+          jokes: jokesResult
+        });
+      }
+    } catch(error){
       dispatch({
         type: actionType.ERRORTOST_JOKE_FAILED,
-        errorMsg:'Joke Not updated' 
+        message:'Joke Not updated' 
       });
     }
     

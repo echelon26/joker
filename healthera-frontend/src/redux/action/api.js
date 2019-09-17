@@ -9,12 +9,12 @@ class Api {
       "Content-Type": "application/json"
     };
     const response = await axios.post(`http://localhost:7000`, joke, headers);
-    return response.data;
+    return response;
   };
 
   loadJokes = async () => {
-    const jokes = await axios.get(`http://localhost:7000`);
-    return jokes.data;
+    const response = await axios.get(`http://localhost:7000`);
+    return response;
   };
   updateJoke = async joke => {
     let headers = {
